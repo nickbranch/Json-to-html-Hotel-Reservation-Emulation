@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Latest compiled and minified CSS -->
+  <script src="https://kit.fontawesome.com/f651b3da4d.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/range.css">
+  <link rel="stylesheet" href="css/style.css">
+
+  <title>Hotel Front End Assignment</title>
+
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand js-scroll-trigger" href="index.html">Individual Assignment</a><button
+        class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded"
+        type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive"
+        aria-expanded="false" aria-label="Toggle navigation">Menu <i class="fas fa-bars"></i></button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item mx-0 mx-lg-1">Kladis Nikolaos - </li>
+          <li class="nav-item mx-0 mx-lg-1">Json To Hmtl Project</li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div id="searchBar" class="row">
+      <div class="col-md-12">
+        <div class="input-group mb-3">
+          <input type="text" list="cities" id="searchInput" name="search" class="form-control" placeholder="Search"
+            aria-label="" aria-describedby="basic-addon2">
+          <datalist id="cities"></datalist>
+          <div class="input-group-append">
+            <button id="searchButton" class="btn btn-outline-secondary btn-primary text-white"
+              type="button">Search</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="dateRow" class="row">
+      <div class="col-sm-4">
+        <input type="text" class="form-control checkIn" placeholder="Check-In">
+      </div>
+      <div class="col-sm-4">
+        <input type="text" class="form-control checkOut" placeholder="Check-Out">
+      </div>
+      <div class="col-sm-4">
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle text-center" type="button" id="familyRooms"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            All
+          </button>
+          <div id="vacancyDropDown" class="dropdown-menu" aria-labelledby="propertyDropdown">
+            <a class="dropdown-item" onclick="changeVacancySelection(this.innerHTML)" href="#"> All</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="filters" class="row">
+      <div class="col-md-4">
+        <label for="price" class="text-white">Price: <span id="selected_price"> &nbsp; 15000</span></label>
+        <span class="text-white float-right">€ &nbsp;</span> <span class="text-white float-right">Max: 15000
+          &nbsp;</span>
+        <input id="price" type="range" min="0" max="15000" value="10000" />
+      </div>
+      <div class="col-md-2">
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle text-center" type="button" id="starDropDown"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="fa fa-star checked"></span>
+          </button>
+          <div id="starList" class="dropdown-menu text-left" aria-labelledby="propertyDropdown">
+            <a class="dropdown-item" data-value="1" href="#">
+              <span class="fa fa-star"></span>
+            </a>
+            <a class="dropdown-item" data-value="2" href="#">
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star"></span>
+            </a>
+            <a class="dropdown-item" data-value="3" href="#">
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star"></span>
+            </a>
+            <a class="dropdown-item" data-value="4" href="#">
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star"></span>
+            </a>
+            <a class="dropdown-item" data-value="5" href="#">
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star"></span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="guestRatingDropDown"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Guest Rating <br>
+            All
+          </button>
+          <div id="dropdownForGuestRating" class="text-left dropdown-menu widthFix"
+            aria-labelledby="guestRatingDropDown">
+            <a class="dropdown-item" data-value="8.5" href="#">
+              <span class="badge badge-success badge-pill">8.5</span>-
+              <span class="badge badge-success badge-pill">10</span>
+              Excellent
+            </a>
+            <a class="dropdown-item" data-value="7" href="#">
+              <span class="badge badge-success badge-pill">7</span>-
+              <span class="badge badge-success badge-pill">8.5</span>
+              Very Good
+            </a>
+            <a class="dropdown-item" data-value="6" href="#">
+              <span class="badge badge-primary badge-pill">6</span>-
+              <span class="badge badge-primary badge-pill">7</span>
+              Good
+            </a>
+            <a class="dropdown-item" data-value="2" href="#">
+              <span class="badge badge-secondary badge-pill">2</span>-
+              <span class="badge badge-secondary badge-pill">6</span>
+              Fair
+            </a>
+            <a class="dropdown-item" data-value="0" href="#">
+              <span class="badge badge-warning badge-pill">0</span>-
+              <span class="badge badge-warning badge-pill">2</span>
+              OK
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="hotelLocationDropDown"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Hotel Location <br>
+            All
+          </button>
+          <div id="hoteLoc" class="dropdown-menu" aria-labelledby="hotelLocationDropDown">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="moreFiltersDropDown"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            More Filters <br>
+            All
+          </button>
+          <div class="dropdown-menu" aria-labelledby="moreFiltersDropDown">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="mapAndRec" class="row">
+      <div class="col-md-6 text-left">
+        <div id="gm">
+          <button id="gmbutton" class="btn" data-toggle="modal" data-target="#mapModal" onclick="initApp()">
+            <i class="fas fa-map-marker-alt"></i> Show Map</button>
+        </div>
+      </div>
+
+      <div class="col-md-6 text-right">
+
+        <div class="dropdown">
+          Sort by
+          <button id="recommendDropDown" class="btn btn-secondary dropdown-toggle" style="color: black" type="button"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Our Recommendations
+          </button>
+          <div id="recommendDropDownList" class="dropdown-menu" style="width: 200px"
+            aria-labelledby="dropdownMenuButton">
+
+          </div>
+          <i class="fas fa-exclamation-circle"></i>
+        </div>
+      </div>
+    </div>
+
+    <div id="hotels" class="container">
+
+    </div>
+  </div>
+
+  <!-- MAP Modal -->
+  <div class="modal fade" id="mapModal" tabindex="-1" role="dialog" aria-labelledby="map" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="map">Map</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="embed-responsive embed-responsive-16by9">
+            <iframe id="mapiframe"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4444.558731370149!2d23.725847498022404!3d38.028963543309494!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14a1a2f12a1c632f%3A0xadfa61aab7b5b527!2zzqPOms6bzpHOks6Vzp3Omc6kzpfOow!5e0!3m2!1sel!2sgr!4v1587252190247!5m2!1sel!2sgr"
+              width="800" height="600" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false"
+              tabindex="0"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="http://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script>
+    function changeVacancySelection(theInput) {
+      var vacancyButton = document.querySelector("#familyRooms");
+      vacancyButton.innerHTML = theInput;
+    }
+
+    function changeRecommendationSelection(theInput) {
+      var recommendButton = document.querySelector("#recommendDropDown");
+      recommendButton.innerHTML = theInput;
+    }
+
+    function initApp(data) {
+      const roomtypes = data[0].roomtypes;
+      const entries = data[1].entries;
+      const listOfFilters = Array();
+      const completelistoffilters = Array();
+      const listOfRatings = Array();
+
+      entries.forEach(element => listOfFilters.push(element.filters));
+      listOfFilters.forEach(element => element.forEach(element2 => completelistoffilters.push(element2.name)));
+      entries.forEach(element => listOfRatings.push(element.ratings));
+
+      const searchInput = document.querySelector("#searchInput");
+      const searchButton = document.querySelector("#searchButton");
+      const listOfCities = document.querySelector("#cities");
+      const hotelLocation = document.querySelector("#hoteLoc");
+      const hotelsEl = document.querySelector("#hotels");
+      const priceSlider = document.querySelector("#price");
+      const selPrice = document.querySelector("#selected_price");
+      const vacancyDropDownList = document.querySelector("#vacancyDropDown");
+      const recommendDropDownListValue = document.querySelector("#recommendDropDownList");
+      const mapCoordinates = document.querySelector("#mapiframe");
+
+      var tempMapCoordinates = entries[0].mapurl;
+      mapCoordinates.src = tempMapCoordinates;
+
+      Array.prototype.contains = function (needle) {
+        for (i in this) {
+          if (this[i] == needle) return true;
+        }
+        return false;
+      }
+
+      entries.map(function (entry) {
+        var resultLength = entries.length;
+        hotelsEl.innerHTML += `
+            <div class="hotel row">
+              <div class="col-md-4">
+                  <img src="${entry.thumbnail}" height='300' width='300'></img>
+              </div>
+              <div class="col-md-4">
+                <h3> ${entry.hotelName}</h2>
+                <div id="ratingsEtc${entries.indexOf(entry)}"></div>
+                <p> ${entry.city}</p>
+                <span class="badge badge-success badge-pill">${entry.ratings.no}</span> ${entry.ratings.text}
+              </div>
+              <div id="filtersGen${entries.indexOf(entry)}" class="col-md-1">
+                </div>
+                <div id="priceResultDiv${entries.indexOf(entry)}" class="col-md-3">
+                </div> 
+                </div>
+                `;
+
+        var filterPerHotel = entry.filters;
+        filterPerHotel.map(function (filterperH) {
+          var filterstoadd = document.querySelector("#filtersGen" + entries.indexOf(entry));
+          filterstoadd.innerHTML += `
+            <span class="badge badge-success badge-pill">${filterperH.name}</span>
+            `;
+        });
+        var pricetoadd = document.querySelector("#priceResultDiv" + entries.indexOf(entry));
+        pricetoadd.innerHTML += `
+              </div>
+              <h2 style="color:green;margin-top: 50%;text-align:center">€ ${entry.price}</h2>
+              </div>					
+            `;
+        var ratingsToBeAdded = document.querySelector("#ratingsEtc" + entries.indexOf(entry));
+        for (i = 0; i < entry.rating; i++) {
+          ratingsToBeAdded.innerHTML += `
+          <span class="fa fa-star checked"></span>
+            `;
+        }
+      });
+
+      roomtypes.map(function (roomtype) {
+        if (roomtype.name == "Single") {
+          vacancyDropDownList.innerHTML += `
+          <a class="dropdown-item" onclick="changeVacancySelection(this.innerHTML)" href="#"><i class="fas fa-user"></i>&nbsp; Single</a>
+          `;
+        } else if (roomtype.name == "Double") {
+          vacancyDropDownList.innerHTML += `<a class="dropdown-item" onclick="changeVacancySelection(this.innerHTML)" href="#"><i
+                class="fas fa-user-friends"></i>&nbsp; Double</a>`;
+        } else if (roomtype.name == "Family Rooms") {
+          vacancyDropDownList.innerHTML += `<a class="dropdown-item" onclick="changeVacancySelection(this.innerHTML)" href="#"><i
+                class="fas fa-users"></i>&nbsp; Family</a>`;
+        } else {
+          vacancyDropDownList.innerHTML += `<a class="dropdown-item" onclick="changeVacancySelection(this.innerHTML)" href="#"> ${entry.hotelName}</a>`;
+        }
+      });
+
+      var filterArray = Array();
+      completelistoffilters.map(function (option) {
+        var filterString = option;
+        var checkIfExists = filterArray.contains(filterString);
+
+        if (!checkIfExists) {
+          filterArray.push(filterString);
+          recommendDropDownListValue.innerHTML += `
+          <a class="dropdown-item" href="#">${filterString}</a><br>
+          `;
+        }
+      });
+
+      var arrayOfEntries = Array();
+      entries.map(function (entry) {
+        var cityString = entry.city;
+        var autocompleteChecker = arrayOfEntries.contains(cityString);
+
+        if (!autocompleteChecker) {
+          arrayOfEntries.push(entry.city);
+          listOfCities.innerHTML += `
+        <option value="${entry.city}">
+					`;
+        }
+      });
+
+      var arrayOfCities = Array();
+      entries.map(function (entry) {
+        var cityString = entry.city;
+        var checkIfExists = arrayOfCities.contains(cityString);
+
+        if (!checkIfExists) {
+          arrayOfCities.push(entry.city);
+          hotelLocation.innerHTML += `
+          <a class="dropdown-item" href="#">${cityString}</a>
+					`;
+        }
+      });
+
+      priceSlider.addEventListener("input", function () {
+        selPrice.innerText = priceSlider.value;
+      })
+      priceSlider.addEventListener("change", function () {
+        selPrice.innerText = priceSlider.value;
+        const filtered = entries.filter(function (entry) {
+          return entry.price < priceSlider.value;
+        });
+
+        hotelsEl.innerHTML = "";
+        filtered.map(function (entry) {
+          var filteredlength = filtered.length;
+          hotelsEl.innerHTML += `
+            <div class="hotel row">
+              <div class="col-md-4">
+                  <img src="${entry.thumbnail}" height='300' width='300'></img>
+              </div>
+              <div class="col-md-4">
+                <h3> ${entry.hotelName}</h2>
+                <div id="ratingsEtc${filtered.indexOf(entry)}"></div>
+                <p> ${entry.city}</p>
+                <span class="badge badge-success badge-pill">${entry.ratings.no}</span> ${entry.ratings.text}
+              </div>
+              <div id="filtersGen${filtered.indexOf(entry)}" class="col-md-1">
+                </div>
+                <div id="priceResultDiv${filtered.indexOf(entry)}" class="col-md-3">
+                </div> 
+                </div>
+                `;
+          var filterPerHotel = entry.filters;
+          filterPerHotel.map(function (filterperH) {
+            var filterstoadd = document.querySelector("#filtersGen" + filtered.indexOf(entry));
+            filterstoadd.innerHTML += `
+            <span class="badge badge-success badge-pill">${filterperH.name}</span>
+            `;
+          });
+          var pricetoadd = document.querySelector("#priceResultDiv" + filtered.indexOf(entry));
+          pricetoadd.innerHTML += `
+              </div>
+              <h2 style="color:green;margin-top: 50%;text-align:center">€ ${entry.price}</h2>
+              </div>					
+            `;
+          var ratingsToBeAdded = document.querySelector("#ratingsEtc" + filtered.indexOf(entry));
+          for (i = 0; i < entry.rating; i++) {
+            ratingsToBeAdded.innerHTML += `
+            <span class="fa fa-star checked"></span>
+              `;
+          }
+        });
+      });
+
+      searchButton.addEventListener("click", function () {
+        var searchTerm = searchInput.value;
+        const filtered = entries.filter(function (entry) {
+          if (entry.city.toLowerCase() == searchTerm.toLowerCase()) {
+            return entry;
+          }
+        });
+        hotelsEl.innerHTML = "";
+        filtered.map(function (entry) {
+          var filteredlength = filtered.length;
+          hotelsEl.innerHTML += `
+            <div class="hotel row">
+              <div class="col-md-4">
+                  <img src="${entry.thumbnail}" height='300' width='300'></img>
+              </div>
+              <div class="col-md-4">
+                <h3> ${entry.hotelName}</h2>
+                    <div id="ratingsEtc${filtered.indexOf(entry)}"></div>
+                    <p> ${entry.city}</p>
+                    <span class="badge badge-success badge-pill">${entry.ratings.no}</span> ${entry.ratings.text}
+              </div>
+              <div id="filtersGen${filtered.indexOf(entry)}" class="col-md-1">
+                </div>
+                <div id="priceResultDiv${filtered.indexOf(entry)}" class="col-md-3">
+                </div> 
+                </div>
+                `;
+          var filterPerHotel = entry.filters;
+          filterPerHotel.map(function (filterperH) {
+            var filterstoadd = document.querySelector("#filtersGen" + filtered.indexOf(entry));
+            filterstoadd.innerHTML += `
+            <span class="badge badge-success badge-pill">${filterperH.name}</span>
+            `;
+          });
+          var pricetoadd = document.querySelector("#priceResultDiv" + filtered.indexOf(entry));
+          pricetoadd.innerHTML += `
+              </div>
+              <h2 style="color:green;margin-top: 50%;text-align:center">€ ${entry.price}</h2>
+              </div>					
+            `;
+          var ratingsToBeAdded = document.querySelector("#ratingsEtc" + filtered.indexOf(entry));
+          for (i = 0; i < entry.rating; i++) {
+            ratingsToBeAdded.innerHTML += `
+          <span class="fa fa-star checked"></span>
+          `;
+          }
+        });
+      });
+
+      $("#starList a").on("click", function () {
+        var thebutton = document.querySelector("#starDropDown");
+        $("#starDropDown").val($(this).data("value"));
+        var starRating = parseInt(thebutton.value);
+
+        const filtered = entries.filter(function (entry) {
+          if (parseInt(entry.rating) == starRating) {
+            return entry;
+          }
+        });
+
+        hotelsEl.innerHTML = "";
+        filtered.map(function (entry) {
+          var filteredlength = filtered.length;
+          hotelsEl.innerHTML += `
+            <div class="hotel row">
+              <div class="col-md-4">
+                  <img src="${entry.thumbnail}" height='300' width='300'></img>
+              </div>
+              <div class="col-md-4">
+                <h3> ${entry.hotelName}</h2>
+                    <div id="ratingsEtc${filtered.indexOf(entry)}"></div>
+                    <p> ${entry.city}</p>
+                    <span class="badge badge-success badge-pill">${entry.ratings.no}</span> ${entry.ratings.text}
+              </div>
+              <div id="filtersGen${filtered.indexOf(entry)}" class="col-md-1">
+                </div>
+                <div id="priceResultDiv${filtered.indexOf(entry)}" class="col-md-3">
+                </div> 
+                </div>
+                `;
+          var filterPerHotel = entry.filters;
+          filterPerHotel.map(function (filterperH) {
+            var filterstoadd = document.querySelector("#filtersGen" + filtered.indexOf(entry));
+            filterstoadd.innerHTML += `
+            <span class="badge badge-success badge-pill">${filterperH.name}</span>
+            `;
+          });
+          var pricetoadd = document.querySelector("#priceResultDiv" + filtered.indexOf(entry));
+          pricetoadd.innerHTML += `
+              </div>
+              <h2 style="color:green;margin-top: 50%;text-align:center">€ ${entry.price}</h2>
+              </div>
+            `;
+          var ratingsToBeAdded = document.querySelector("#ratingsEtc" + filtered.indexOf(entry));
+          for (i = 0; i < entry.rating; i++) {
+            ratingsToBeAdded.innerHTML += `
+          <span class="fa fa-star checked"></span>
+          `;
+          }
+        });
+      });
+
+      $("#hoteLoc a").on("click", function () {
+        var cityValue = this.innerText;
+        const filtered = entries.filter(function (entry) {
+          if (entry.city == cityValue) {
+            return entry;
+          }
+        });
+
+        hotelsEl.innerHTML = "";
+
+        filtered.map(function (entry) {
+          var filteredlength = filtered.length;
+          hotelsEl.innerHTML += `
+            <div class="hotel row">
+              <div class="col-md-4">
+                  <img src="${entry.thumbnail}" height='300' width='300'></img>
+              </div>
+              <div class="col-md-4">
+                <h3> ${entry.hotelName}</h2>
+                    <div id="ratingsEtc${filtered.indexOf(entry)}"></div>
+                    <p> ${entry.city}</p>
+                    <span class="badge badge-success badge-pill">${entry.ratings.no}</span> ${entry.ratings.text}
+              </div>
+              <div id="filtersGen${filtered.indexOf(entry)}" class="col-md-1">
+                </div>
+                <div id="priceResultDiv${filtered.indexOf(entry)}" class="col-md-3">
+                </div> 
+                </div>
+                `;
+          var filterPerHotel = entry.filters;
+          filterPerHotel.map(function (filterperH) {
+            var filterstoadd = document.querySelector("#filtersGen" + filtered.indexOf(entry));
+            filterstoadd.innerHTML += `
+            <span class="badge badge-success badge-pill">${filterperH.name}</span>
+            `;
+          });
+          var pricetoadd = document.querySelector("#priceResultDiv" + filtered.indexOf(entry));
+          pricetoadd.innerHTML += `
+              </div>
+              <h2 style="color:green;margin-top: 50%;text-align:center">€ ${entry.price}</h2>
+              </div>
+            `;
+          var ratingsToBeAdded = document.querySelector("#ratingsEtc" + filtered.indexOf(entry));
+          for (i = 0; i < entry.rating; i++) {
+            ratingsToBeAdded.innerHTML += `
+          <span class="fa fa-star checked"></span>
+          `;
+          }
+        });
+      });
+
+
+      $("#recommendDropDownList a").on("click", function () {
+        var filterValue = this.innerText;
+        const filtered = entries.filter(function (entry) {
+          var filtersPerEntry = entry.filters;
+          var checkIfExists;
+          var arrayOfFilters = Array();
+          filtersPerEntry.map(function (filterPerEntry) {
+            var temp = filterPerEntry.name;
+            arrayOfFilters.push(temp);
+            if (arrayOfFilters.contains(filterValue)) {
+              checkIfExists = true;
+            }
+          });
+          if (checkIfExists) {
+            return entry;
+          }
+        });
+        hotelsEl.innerHTML = "";
+        filtered.map(function (entry) {
+          var filteredlength = filtered.length;
+          hotelsEl.innerHTML += `
+            <div class="hotel row">
+              <div class="col-md-4">
+                  <img src="${entry.thumbnail}" height='300' width='300'></img>
+              </div>
+              <div class="col-md-4">
+                <h3> ${entry.hotelName}</h2>
+                    <div id="ratingsEtc${filtered.indexOf(entry)}"></div>
+                    <p> ${entry.city}</p>
+                    <span class="badge badge-success badge-pill">${entry.ratings.no}</span> ${entry.ratings.text}
+              </div>
+              <div id="filtersGen${filtered.indexOf(entry)}" class="col-md-1">
+                </div>
+                <div id="priceResultDiv${filtered.indexOf(entry)}" class="col-md-3">
+                </div> 
+                </div>
+                `;
+          var filterPerHotel = entry.filters;
+          filterPerHotel.map(function (filterperH) {
+            var filterstoadd = document.querySelector("#filtersGen" + filtered.indexOf(entry));
+            filterstoadd.innerHTML += `
+            <span class="badge badge-success badge-pill">${filterperH.name}</span>
+            `;
+          });
+          var pricetoadd = document.querySelector("#priceResultDiv" + filtered.indexOf(entry));
+          pricetoadd.innerHTML += `
+              </div>
+              <h2 style="color:green;margin-top: 50%;text-align:center">€ ${entry.price}</h2>
+              </div>
+            `;
+          var ratingsToBeAdded = document.querySelector("#ratingsEtc" + filtered.indexOf(entry));
+          for (i = 0; i < entry.rating; i++) {
+            ratingsToBeAdded.innerHTML += `
+          <span class="fa fa-star checked"></span>
+          `;
+          }
+        });
+      });
+
+      $("#dropdownForGuestRating a").on("click", function () {
+        var thebutton = document.querySelector("#guestRatingDropDown");
+        $("#guestRatingDropDown").val($(this).data("value"));
+        var guestValue = parseFloat(thebutton.value);
+
+        console.log(guestValue);
+
+        const filtered = entries.filter(function (entry) {
+          var valToCheck = parseFloat(entry.ratings.no);
+          switch (guestValue) {
+            case 0:
+              if ((valToCheck >= 0) && (valToCheck <= 2)) {
+                return entry;
+              }
+              break;
+            case 2:
+              if ((valToCheck >= 2) && (valToCheck <= 6)) {
+                return entry;
+              }
+              break;
+            case 6:
+              if ((valToCheck >= 6) && (valToCheck <= 7)) {
+                return entry;
+              }
+              break;
+            case 7:
+              if ((valToCheck >= 7) && (valToCheck <= 8.5)) {
+                return entry;
+              }
+              break;
+            case 8.5:
+              if ((valToCheck >= 8.5) && (valToCheck <= 10.0)) {
+                return entry;
+              }
+              break;
+            default:
+          }
+        });
+
+        hotelsEl.innerHTML = "";
+        filtered.map(function (entry) {
+          var filteredlength = filtered.length;
+          hotelsEl.innerHTML += `
+            <div class="hotel row">
+              <div class="col-md-4">
+                  <img src="${entry.thumbnail}" height='300' width='300'></img>
+              </div>
+              <div class="col-md-4">
+                <h3> ${entry.hotelName}</h2>
+                    <div id="ratingsEtc${filtered.indexOf(entry)}"></div>
+                    <p> ${entry.city}</p>
+                    <span class="badge badge-success badge-pill">${entry.ratings.no}</span> ${entry.ratings.text}
+              </div>
+              <div id="filtersGen${filtered.indexOf(entry)}" class="col-md-1">
+                </div>
+                <div id="priceResultDiv${filtered.indexOf(entry)}" class="col-md-3">
+                </div> 
+                </div>
+                `;
+          var filterPerHotel = entry.filters;
+          filterPerHotel.map(function (filterperH) {
+            var filterstoadd = document.querySelector("#filtersGen" + filtered.indexOf(entry));
+            filterstoadd.innerHTML += `
+            <span class="badge badge-success badge-pill">${filterperH.name}</span>
+            `;
+          });
+          var pricetoadd = document.querySelector("#priceResultDiv" + filtered.indexOf(entry));
+          pricetoadd.innerHTML += `
+              </div>
+              <h2 style="color:green;margin-top: 50%;text-align:center">€ ${entry.price}</h2>
+              </div>
+            `;
+          var ratingsToBeAdded = document.querySelector("#ratingsEtc" + filtered.indexOf(entry));
+          for (i = 0; i < entry.rating; i++) {
+            ratingsToBeAdded.innerHTML += `
+          <span class="fa fa-star checked"></span>
+          `;
+          }
+        });
+      });
+
+    }
+
+    fetch("./data.json")
+      .then(function (response) {
+        return response.json();
+      })
+      .then(initApp)
+      .catch(function (error) {
+        console.log("Error:", error.message);
+      });
+  </script>
+
+  <!-- Latest compiled and minified JavaScript -->
+
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+  <script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+  <script src="js/myJS.js" charset="utf-8"></script>
+</body>
+
+</html>
